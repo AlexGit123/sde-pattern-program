@@ -1,0 +1,23 @@
+{
+  "name": "sde-pattern-program",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexGit123/sde-pattern-program.git"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexGit123/sde-pattern-program/issues"
+  },
+  "homepage": "https://github.com/AlexGit123/sde-pattern-program#readme",
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
