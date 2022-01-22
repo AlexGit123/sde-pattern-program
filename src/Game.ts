@@ -1,7 +1,9 @@
+import Loop from './Loop.js';
+
 /**
  * Facade Pattern
  */
-class Game {
+export default class Game {
   private static instance: Game;
   private canvasElement: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -25,7 +27,9 @@ class Game {
     this.loop.start();
   }
 
-  update() {}
+  update() {
+    console.log('Updated');
+  }
 
   draw() {}
 

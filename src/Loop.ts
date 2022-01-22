@@ -1,4 +1,4 @@
-class Loop {
+export default class Loop {
   private update: () => void;
   private draw: () => void;
   private isRunning: boolean;
