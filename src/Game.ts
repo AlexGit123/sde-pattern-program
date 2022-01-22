@@ -13,6 +13,8 @@ class Game {
     return Game.instance;
   }
 
+  start() {}
+
   update() {}
 
   draw() {}
