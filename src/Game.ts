@@ -3,8 +3,16 @@
  */
 class Game {
   private static instance: Game;
+  private canvasElement: HTMLCanvasElement;
+  private ctx: CanvasRenderingContext2D;
+  private loop: Loop;
 
-  private constructor() {}
+  private constructor() {
+    this.canvasElement = document.getElementById("game") as HTMLCanvasElement;
+    this.ctx = this.canvasElement.getContext("2d") as CanvasRenderingContext2D;
+
+    this.loop = new Loop(this.update, this.draw);
+  }
 
   public static getInstance() {
     if (!Game.instance) {
@@ -13,11 +21,15 @@ class Game {
     return Game.instance;
   }
 
-  start() {}
+  start() {
+    this.loop.start();
+  }
 
   update() {}
 
   draw() {}
 
-  reset() {}
+  stop() {
+    this.loop.stop();
+  }
 }
