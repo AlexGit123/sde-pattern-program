@@ -7,7 +7,7 @@
 ## Patterns used:
 
 - Creational:
-  Singleton (done) 
+  Singleton (done)
 
 - Structural:
   Facade (done),
@@ -19,7 +19,7 @@
 
 Amount of time spent: 3hr
 
-Responsibilities:
+## Responsibilities:
 
 Alex - Build facade and singleton pattern
 
