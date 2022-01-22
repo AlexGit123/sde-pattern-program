@@ -2,9 +2,7 @@
 
 ## Goal: Implement six or more design patterns into a working program.
 
-## Project Type:
-
-- Game
+## Project Type: Game
 
 ## Patterns used:
 
