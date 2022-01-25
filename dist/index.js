@@ -5,7 +5,7 @@ define("Entity", ["require", "exports"], function (require, exports) {
      * Template method
      */
     class Entity {
-        constructor(name, x = 256, y = 256, width = 32, height = 32, color = "black") {
+        constructor(name, x = 256, y = 256, width = 32, height = 32, color = "red") {
             this.name = name;
             this.x = x;
             this.y = y;
@@ -20,8 +20,9 @@ define("Entity", ["require", "exports"], function (require, exports) {
         draw(ctx) {
             ctx.fillStyle = this.color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
-            ctx.font = "16px Monospace";
-            ctx.fillText(this.name, this.x, this.y);
+            ctx.textAlign = "center";
+            ctx.font = "16px monospace";
+            ctx.fillText(this.name, this.x + (this.width / 2), this.y - 4);
         }
         getRandomInt(min, max) {
             return Math.round(Math.random() * (max - min) + min);
@@ -147,25 +148,25 @@ define("index", ["require", "exports", "Game"], function (require, exports, Game
     const game = Game_1.default.getInstance();
     game.start();
 });
-define("Entities/BlueBox", ["require", "exports", "Entity"], function (require, exports, Entity_2) {
+define("entities/BlueBox", ["require", "exports", "Entity"], function (require, exports, Entity_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class BlueBox extends Entity_2.default {
     }
 });
-define("Entities/GreenBox", ["require", "exports", "Entity"], function (require, exports, Entity_3) {
+define("entities/GreenBox", ["require", "exports", "Entity"], function (require, exports, Entity_3) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class GreenBox extends Entity_3.default {
     }
 });
-define("Entities/RedBox", ["require", "exports", "Entity"], function (require, exports, Entity_4) {
+define("entities/RedBox", ["require", "exports", "Entity"], function (require, exports, Entity_4) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class RedBox extends Entity_4.default {
     }
 });
-define("Entities/YellowBox", ["require", "exports", "Entity"], function (require, exports, Entity_5) {
+define("entities/YellowBox", ["require", "exports", "Entity"], function (require, exports, Entity_5) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class YellowBox extends Entity_5.default {
