@@ -44,16 +44,16 @@ export default class Game {
     return Game.instance;
   }
 
-  start() {
+  public start() {
     this.loop.start();
   }
 
-  update() {
+  public update() {
     this.entities.forEach((entity) => entity.update());
     this.entities.sort((a, b) => a.y - b.y);
   }
 
-  draw() {
+  public draw() {
     this.ctx.fillStyle = "#FDF9F3";
     this.ctx.fillRect(
       0,
@@ -64,11 +64,11 @@ export default class Game {
     this.entities.forEach((entity) => entity.draw(this.ctx));
   }
 
-  stop() {
+  public stop() {
     this.loop.stop();
   }
 
-  onClick(x: number, y: number) {
+  private onClick(x: number, y: number) {
     this.entities.push(new BlueBox("Blue", x, y));
     this.entities.push(new GreenBox("Green", x, y));
     this.entities.push(new RedBox("Red", x, y));
