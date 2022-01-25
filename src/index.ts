@@ -1,4 +1,4 @@
-import Game from './Game';
+import Game from "./Game";
 
 // Launch game
 const game = Game.getInstance();

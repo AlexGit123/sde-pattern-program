@@ -156,14 +156,14 @@ class Mouse {
         this.canvas = canvas;
         this.observers = { onClick: [], onMove: [] };
         // On click
-        canvas.addEventListener('mouseup', (event) => {
+        canvas.addEventListener("mouseup", (event) => {
             const { x, y } = this.getMousePosition(event);
             this.x = x;
             this.y = y;
             this.observers.onClick.forEach((observer) => observer(x, y));
         }, false);
         // On move
-        canvas.addEventListener('mousemove', (event) => {
+        canvas.addEventListener("mousemove", (event) => {
             const { x, y } = this.getMousePosition(event);
             this.x = x;
             this.y = y;
@@ -181,7 +181,7 @@ class Mouse {
         const { left, top } = this.canvas.getBoundingClientRect();
         return {
             x: Math.floor(clientX - left),
-            y: Math.floor(clientY - top)
+            y: Math.floor(clientY - top),
         };
     }
 }

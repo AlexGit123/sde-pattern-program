@@ -11,13 +11,11 @@
 
 - Structural:
   Facade (done),
-  Composite (almost done)
+  Composite (done)
 
 - Behavioral:
   Template method (almost done),
   Observer
-
-Amount of time spent: 3hr
 
 ## Responsibilities:
 
