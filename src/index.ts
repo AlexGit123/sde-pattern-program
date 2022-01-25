@@ -1,9 +1,5 @@
-import Game from './Game.js';
+import Game from './Game';
 
 // Launch game
 const game = Game.getInstance();
 game.start();
-
-setTimeout(() => {
-game.stop();
-}, 2000);

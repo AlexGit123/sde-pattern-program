@@ -45,17 +45,24 @@ define("Loop", ["require", "exports"], function (require, exports) {
     }
     exports.default = Loop;
 });
-define("Game", ["require", "exports", "Loop"], function (require, exports, Loop_js_1) {
+define("Game", ["require", "exports", "Loop"], function (require, exports, Loop_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
-     * Facade Pattern
+     * Singleton & Facade Pattern
      */
     class Game {
         constructor() {
+            // Canvas initialization
             this.canvasElement = document.getElementById("game");
+            this.canvasElement.width = 512;
+            this.canvasElement.height = 512;
             this.ctx = this.canvasElement.getContext("2d");
-            this.loop = new Loop_js_1.default(this.update, this.draw);
+            // Game loop initialization
+            this.loop = new Loop_1.default(this.update, this.draw);
+            // Mouse initialization
+            this.mouse = new Mouse(this.canvasElement);
+            this.mouse.onClick(this.onClick);
         }
         static getInstance() {
             if (!Game.instance) {
@@ -69,21 +76,59 @@ define("Game", ["require", "exports", "Loop"], function (require, exports, Loop_
         update() {
             console.log('Updated');
         }
-        draw() { }
+        draw() {
+        }
         stop() {
             this.loop.stop();
+        }
+        onClick(x, y) {
+            console.log(x, y);
         }
     }
     exports.default = Game;
 });
-define("index", ["require", "exports", "Game"], function (require, exports, Game_js_1) {
+/**
+ * Observer pattern
+ */
+class Mouse {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.observers = { onClick: [], onMove: [] };
+        // On click
+        canvas.addEventListener('mouseup', (event) => {
+            const { x, y } = this.getMousePosition(event);
+            this.x = x;
+            this.y = y;
+            this.observers.onClick.forEach((observer) => observer(x, y));
+        }, false);
+        // On move
+        canvas.addEventListener('mousemove', (event) => {
+            const { x, y } = this.getMousePosition(event);
+            this.x = x;
+            this.y = y;
+            this.observers.onMove.forEach((observer) => observer(x, y));
+        }, false);
+    }
+    onMove(callback) {
+        this.observers.onMove.push(callback);
+    }
+    onClick(callback) {
+        this.observers.onClick.push(callback);
+    }
+    getMousePosition(event) {
+        const { clientX, clientY } = event;
+        const { left, top } = this.canvas.getBoundingClientRect();
+        return {
+            x: Math.floor(clientX - left),
+            y: Math.floor(clientY - top)
+        };
+    }
+}
+define("index", ["require", "exports", "Game"], function (require, exports, Game_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     // Launch game
-    const game = Game_js_1.default.getInstance();
+    const game = Game_1.default.getInstance();
     game.start();
-    setTimeout(() => {
-        game.stop();
-    }, 2000);
 });
 //# sourceMappingURL=index.js.map
