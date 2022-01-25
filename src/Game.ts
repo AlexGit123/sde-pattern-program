@@ -18,8 +18,6 @@ export default class Game {
   private entities: Entity[];
 
   private constructor() {
-    this.entities = [];
-    this.entities.push(new Entity("Bob"));
 
     // Canvas initialization
     this.canvasElement = document.getElementById("game") as HTMLCanvasElement;
@@ -33,6 +31,10 @@ export default class Game {
     // Mouse initialization
     this.mouse = new Mouse(this.canvasElement);
     this.mouse.onClick((x, y) => this.onClick(x, y));
+
+    // Spawn 
+    this.entities = [];
+    this.entities.push(new Entity("Black"));
   }
 
   public static getInstance() {
@@ -48,7 +50,6 @@ export default class Game {
 
   update() {
     this.entities.forEach((entity) => entity.update());
-    console.log("Updated");
     this.entities.sort((a, b) => a.y - b.y);
   }
 
@@ -68,7 +69,6 @@ export default class Game {
   }
 
   onClick(x: number, y: number) {
-    console.log(x, y);
     this.entities.push(new BlueBox("Blue", x, y));
     this.entities.push(new GreenBox("Green", x, y));
     this.entities.push(new RedBox("Red", x, y));

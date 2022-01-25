@@ -12,17 +12,24 @@ define("Entity", ["require", "exports"], function (require, exports) {
             this.width = width;
             this.height = height;
             this.color = color;
+            this.currentX = x;
+            this.currentY = y;
         }
         update() {
-            this.x += this.getRandomInt(-4, 4);
-            this.y += this.getRandomInt(-4, 4);
+            this.x += this.getRandomInt(-8, 8);
+            this.y += this.getRandomInt(-8, 8);
+            this.currentX = this.lerp(this.currentX, this.x, 0.1);
+            this.currentY = this.lerp(this.currentY, this.y, 0.1);
         }
         draw(ctx) {
             ctx.fillStyle = this.color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.fillRect(this.currentX, this.currentY, this.width, this.height);
             ctx.textAlign = "center";
             ctx.font = "16px monospace";
-            ctx.fillText(this.name, this.x + this.width / 2, this.y - 4);
+            ctx.fillText(this.name, this.currentX + this.width / 2, this.currentY - 4);
+        }
+        lerp(start, end, t) {
+            return start * (1 - t) + end * t;
         }
         getRandomInt(min, max) {
             return Math.round(Math.random() * (max - min) + min);
@@ -103,8 +110,6 @@ define("Game", ["require", "exports", "Loop", "Entity", "Entities/BlueBox", "Ent
      */
     class Game {
         constructor() {
-            this.entities = [];
-            this.entities.push(new Entity_5.default("Bob"));
             // Canvas initialization
             this.canvasElement = document.getElementById("game");
             this.canvasElement.width = 512;
@@ -115,6 +120,9 @@ define("Game", ["require", "exports", "Loop", "Entity", "Entities/BlueBox", "Ent
             // Mouse initialization
             this.mouse = new Mouse(this.canvasElement);
             this.mouse.onClick((x, y) => this.onClick(x, y));
+            // Spawn 
+            this.entities = [];
+            this.entities.push(new Entity_5.default("Black"));
         }
         static getInstance() {
             if (!Game.instance) {
@@ -127,7 +135,6 @@ define("Game", ["require", "exports", "Loop", "Entity", "Entities/BlueBox", "Ent
         }
         update() {
             this.entities.forEach((entity) => entity.update());
-            console.log("Updated");
             this.entities.sort((a, b) => a.y - b.y);
         }
         draw() {
@@ -139,7 +146,6 @@ define("Game", ["require", "exports", "Loop", "Entity", "Entities/BlueBox", "Ent
             this.loop.stop();
         }
         onClick(x, y) {
-            console.log(x, y);
             this.entities.push(new BlueBox_1.default("Blue", x, y));
             this.entities.push(new GreenBox_1.default("Green", x, y));
             this.entities.push(new RedBox_1.default("Red", x, y));
