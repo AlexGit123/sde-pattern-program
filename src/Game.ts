@@ -1,5 +1,9 @@
 import Loop from "./Loop";
 import Entity from "./Entity";
+import BlueBox from "./Entities/BlueBox";
+import RedBox from "./Entities/RedBox";
+import GreenBox from "./Entities/GreenBox";
+import YellowBox from "./Entities/YellowBox";
 
 /**
  * Singleton & Facade Pattern
@@ -45,6 +49,7 @@ export default class Game {
   update() {
     this.entities.forEach((entity) => entity.update());
     console.log("Updated");
+    this.entities.sort((a, b) => a.y - b.y);
   }
 
   draw() {
@@ -64,6 +69,9 @@ export default class Game {
 
   onClick(x: number, y: number) {
     console.log(x, y);
-    this.entities.push(new Entity("Y", x, y));
+    this.entities.push(new BlueBox("Blue", x, y));
+    this.entities.push(new GreenBox("Green", x, y));
+    this.entities.push(new RedBox("Red", x, y));
+    this.entities.push(new YellowBox("Yellow", x, y));
   }
 }

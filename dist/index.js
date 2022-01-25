@@ -5,7 +5,7 @@ define("Entity", ["require", "exports"], function (require, exports) {
      * Template method
      */
     class Entity {
-        constructor(name, x = 256, y = 256, width = 32, height = 32, color = "red") {
+        constructor(name = "entity", x = 256, y = 256, width = 32, height = 32, color = "red") {
             this.name = name;
             this.x = x;
             this.y = y;
@@ -22,7 +22,7 @@ define("Entity", ["require", "exports"], function (require, exports) {
             ctx.fillRect(this.x, this.y, this.width, this.height);
             ctx.textAlign = "center";
             ctx.font = "16px monospace";
-            ctx.fillText(this.name, this.x + (this.width / 2), this.y - 4);
+            ctx.fillText(this.name, this.x + this.width / 2, this.y - 4);
         }
         getRandomInt(min, max) {
             return Math.round(Math.random() * (max - min) + min);
@@ -55,7 +55,50 @@ define("Loop", ["require", "exports"], function (require, exports) {
     }
     exports.default = Loop;
 });
-define("Game", ["require", "exports", "Loop", "Entity"], function (require, exports, Loop_1, Entity_1) {
+define("Entities/BlueBox", ["require", "exports", "Entity"], function (require, exports, Entity_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class BlueBox extends Entity_1.default {
+        constructor(name = "Blue Box", x = 256, y = 256, width = 32, height = 32, color = "blue") {
+            super(name, x, y, width, height, color);
+        }
+        update() {
+            this.x += 6;
+        }
+    }
+    exports.default = BlueBox;
+});
+define("Entities/RedBox", ["require", "exports", "Entity"], function (require, exports, Entity_2) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class RedBox extends Entity_2.default {
+        constructor(name = "Red Box", x = 256, y = 256, width = 32, height = 32, color = "red") {
+            super(name, x, y, width, height, color);
+        }
+    }
+    exports.default = RedBox;
+});
+define("Entities/GreenBox", ["require", "exports", "Entity"], function (require, exports, Entity_3) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class GreenBox extends Entity_3.default {
+        constructor(name = "Green Box", x = 256, y = 256, width = 32, height = 32, color = "Green") {
+            super(name, x, y, width, height, color);
+        }
+    }
+    exports.default = GreenBox;
+});
+define("Entities/YellowBox", ["require", "exports", "Entity"], function (require, exports, Entity_4) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class YellowBox extends Entity_4.default {
+        constructor(name = "Yellow Box", x = 256, y = 256, width = 32, height = 32, color = "yellow") {
+            super(name, x, y, width, height, color);
+        }
+    }
+    exports.default = YellowBox;
+});
+define("Game", ["require", "exports", "Loop", "Entity", "Entities/BlueBox", "Entities/RedBox", "Entities/GreenBox", "Entities/YellowBox"], function (require, exports, Loop_1, Entity_5, BlueBox_1, RedBox_1, GreenBox_1, YellowBox_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -64,7 +107,7 @@ define("Game", ["require", "exports", "Loop", "Entity"], function (require, expo
     class Game {
         constructor() {
             this.entities = [];
-            this.entities.push(new Entity_1.default("Bob"));
+            this.entities.push(new Entity_5.default("Bob"));
             // Canvas initialization
             this.canvasElement = document.getElementById("game");
             this.canvasElement.width = 512;
@@ -88,6 +131,7 @@ define("Game", ["require", "exports", "Loop", "Entity"], function (require, expo
         update() {
             this.entities.forEach((entity) => entity.update());
             console.log("Updated");
+            this.entities.sort((a, b) => a.y - b.y);
         }
         draw() {
             this.ctx.fillStyle = "white";
@@ -99,7 +143,10 @@ define("Game", ["require", "exports", "Loop", "Entity"], function (require, expo
         }
         onClick(x, y) {
             console.log(x, y);
-            this.entities.push(new Entity_1.default("Y", x, y));
+            this.entities.push(new BlueBox_1.default("Blue", x, y));
+            this.entities.push(new GreenBox_1.default("Green", x, y));
+            this.entities.push(new RedBox_1.default("Red", x, y));
+            this.entities.push(new YellowBox_1.default("Yellow", x, y));
         }
     }
     exports.default = Game;
@@ -147,29 +194,5 @@ define("index", ["require", "exports", "Game"], function (require, exports, Game
     // Launch game
     const game = Game_1.default.getInstance();
     game.start();
-});
-define("entities/BlueBox", ["require", "exports", "Entity"], function (require, exports, Entity_2) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class BlueBox extends Entity_2.default {
-    }
-});
-define("entities/GreenBox", ["require", "exports", "Entity"], function (require, exports, Entity_3) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class GreenBox extends Entity_3.default {
-    }
-});
-define("entities/RedBox", ["require", "exports", "Entity"], function (require, exports, Entity_4) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class RedBox extends Entity_4.default {
-    }
-});
-define("entities/YellowBox", ["require", "exports", "Entity"], function (require, exports, Entity_5) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class YellowBox extends Entity_5.default {
-    }
 });
 //# sourceMappingURL=index.js.map
