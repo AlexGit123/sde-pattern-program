@@ -1,12 +1,12 @@
+import Game from "./Game";
+
 export default class Loop {
-  private update: () => void;
-  private draw: () => void;
+  private game: Game;
   private isRunning: boolean;
 
-  constructor(update: () => void, draw: () => void) {
-    this.update = update;
-    this.draw = draw;
+  constructor(game: Game) {
     this.isRunning = false;
+    this.game = game;
   }
 
   start() {
@@ -21,8 +21,8 @@ export default class Loop {
   private step() {
     if (!this.isRunning) return;
 
-    this.update();
-    this.draw();
+    this.game.update();
+    this.game.draw();
     requestAnimationFrame(() => this.step());
   }
 }

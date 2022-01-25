@@ -11,11 +11,11 @@
 
 - Structural:
   Facade (done),
-  Composite
+  Composite (almost done)
 
 - Behavioral:
-  Strategy,
-  Template method (almost done)
+  Template method (almost done),
+  Observer
 
 Amount of time spent: 3hr
 

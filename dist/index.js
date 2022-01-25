@@ -5,7 +5,8 @@ define("Entity", ["require", "exports"], function (require, exports) {
      * Template method
      */
     class Entity {
-        constructor(name, x = 256, y = 256, width = 32, height = 32, color = 'black') {
+        constructor(name, x = 256, y = 256, width = 32, height = 32, color = "black") {
+            this.name = name;
             this.x = x;
             this.y = y;
             this.width = width;
@@ -13,16 +14,17 @@ define("Entity", ["require", "exports"], function (require, exports) {
             this.color = color;
         }
         update() {
-            this.x += this.getRandomInt(-16, 16);
-            this.y += this.getRandomInt(-16, 16);
+            this.x += this.getRandomInt(-4, 4);
+            this.y += this.getRandomInt(-4, 4);
         }
         draw(ctx) {
+            ctx.fillStyle = this.color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
-            ctx.font = '16px Monospace';
+            ctx.font = "16px Monospace";
             ctx.fillText(this.name, this.x, this.y);
         }
         getRandomInt(min, max) {
-            return Math.floor(Math.random() * max);
+            return Math.round(Math.random() * (max - min) + min);
         }
     }
     exports.default = Entity;
@@ -31,10 +33,9 @@ define("Loop", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class Loop {
-        constructor(update, draw) {
-            this.update = update;
-            this.draw = draw;
+        constructor(game) {
             this.isRunning = false;
+            this.game = game;
         }
         start() {
             this.isRunning = true;
@@ -46,8 +47,8 @@ define("Loop", ["require", "exports"], function (require, exports) {
         step() {
             if (!this.isRunning)
                 return;
-            this.update();
-            this.draw();
+            this.game.update();
+            this.game.draw();
             requestAnimationFrame(() => this.step());
         }
     }
@@ -62,17 +63,17 @@ define("Game", ["require", "exports", "Loop", "Entity"], function (require, expo
     class Game {
         constructor() {
             this.entities = [];
-            this.entities.push(new Entity_1.default('Bob'));
+            this.entities.push(new Entity_1.default("Bob"));
             // Canvas initialization
             this.canvasElement = document.getElementById("game");
             this.canvasElement.width = 512;
             this.canvasElement.height = 512;
             this.ctx = this.canvasElement.getContext("2d");
             // Game loop initialization
-            this.loop = new Loop_1.default(this.update, this.draw);
+            this.loop = new Loop_1.default(this);
             // Mouse initialization
             this.mouse = new Mouse(this.canvasElement);
-            this.mouse.onClick(this.onClick);
+            this.mouse.onClick((x, y) => this.onClick(x, y));
         }
         static getInstance() {
             if (!Game.instance) {
@@ -85,9 +86,11 @@ define("Game", ["require", "exports", "Loop", "Entity"], function (require, expo
         }
         update() {
             this.entities.forEach((entity) => entity.update());
-            console.log('Updated');
+            console.log("Updated");
         }
         draw() {
+            this.ctx.fillStyle = "white";
+            this.ctx.fillRect(0, 0, this.canvasElement.width, this.canvasElement.height);
             this.entities.forEach((entity) => entity.draw(this.ctx));
         }
         stop() {
@@ -95,6 +98,7 @@ define("Game", ["require", "exports", "Loop", "Entity"], function (require, expo
         }
         onClick(x, y) {
             console.log(x, y);
+            this.entities.push(new Entity_1.default("Y", x, y));
         }
     }
     exports.default = Game;
@@ -142,5 +146,29 @@ define("index", ["require", "exports", "Game"], function (require, exports, Game
     // Launch game
     const game = Game_1.default.getInstance();
     game.start();
+});
+define("Entities/BlueBox", ["require", "exports", "Entity"], function (require, exports, Entity_2) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class BlueBox extends Entity_2.default {
+    }
+});
+define("Entities/GreenBox", ["require", "exports", "Entity"], function (require, exports, Entity_3) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class GreenBox extends Entity_3.default {
+    }
+});
+define("Entities/RedBox", ["require", "exports", "Entity"], function (require, exports, Entity_4) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class RedBox extends Entity_4.default {
+    }
+});
+define("Entities/YellowBox", ["require", "exports", "Entity"], function (require, exports, Entity_5) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class YellowBox extends Entity_5.default {
+    }
 });
 //# sourceMappingURL=index.js.map
