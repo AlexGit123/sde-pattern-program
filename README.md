@@ -1,8 +1,5 @@
-# sde-pattern-program
-
-## Goal: Implement six or more design patterns into a working program.
-
-## Project Type: Game
+![Game Screenshot](screenshot.png)
+# SDE Pattern Program
 
 ## Patterns used:
 
