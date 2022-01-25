@@ -25,7 +25,7 @@ Small game that we created for the SDE Program assignment written in TypeScript 
 
 ### Behavioral:
   - #### Template Method
-    Each box in the game is a class that extends from the **Entity** class. They overwrite default entity parameters _(Like color & name)_, and also can overwrite **update** method for changing behaviour, or overwrite **draw** method for changing way of rendering, but those changes is not implemented yet.
+    Each box in the game is a class that extends from the **Entity** class. They overwrite default entity parameters _(Like color & name)_, and also can overwrite **update** method for changing behavior, or overwrite **draw** method for changing way of rendering, but those changes is not implemented yet.
 
 
   - #### Observer
@@ -35,6 +35,6 @@ Small game that we created for the SDE Program assignment written in TypeScript 
 
 ## Responsibilities:
 
-**Alex** - Build facade and singleton pattern, writing entities for template method
+**Alex** - Build facade and singleton pattern, writing entities for the template method. Refactor and format code. 
 
-**Kirill** - Build template method, composite and observer pattern
+**Kirill** - Make HTML template and add some CSS. Build template method, composite and observer pattern.
