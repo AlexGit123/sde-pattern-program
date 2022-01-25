@@ -1,24 +1,32 @@
-/**
- * Template method
- */
-class Entity {
-    constructor(x = 256, y = 256, width = 32, height = 32, color = 'black') {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.color = color;
+define("Entity", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * Template method
+     */
+    class Entity {
+        constructor(name, x = 256, y = 256, width = 32, height = 32, color = 'black') {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+            this.color = color;
+        }
+        update() {
+            this.x += this.getRandomInt(-16, 16);
+            this.y += this.getRandomInt(-16, 16);
+        }
+        draw(ctx) {
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.font = '16px Monospace';
+            ctx.fillText(this.name, this.x, this.y);
+        }
+        getRandomInt(min, max) {
+            return Math.floor(Math.random() * max);
+        }
     }
-    update() {
-        this.x += this.getRandomInt(-16, 16);
-        this.y += this.getRandomInt(-16, 16);
-    }
-    draw(ctx) {
-    }
-    getRandomInt(min, max) {
-        return Math.floor(Math.random() * max);
-    }
-}
+    exports.default = Entity;
+});
 define("Loop", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -45,7 +53,7 @@ define("Loop", ["require", "exports"], function (require, exports) {
     }
     exports.default = Loop;
 });
-define("Game", ["require", "exports", "Loop"], function (require, exports, Loop_1) {
+define("Game", ["require", "exports", "Loop", "Entity"], function (require, exports, Loop_1, Entity_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -53,6 +61,8 @@ define("Game", ["require", "exports", "Loop"], function (require, exports, Loop_
      */
     class Game {
         constructor() {
+            this.entities = [];
+            this.entities.push(new Entity_1.default('Bob'));
             // Canvas initialization
             this.canvasElement = document.getElementById("game");
             this.canvasElement.width = 512;
@@ -74,9 +84,11 @@ define("Game", ["require", "exports", "Loop"], function (require, exports, Loop_
             this.loop.start();
         }
         update() {
+            this.entities.forEach((entity) => entity.update());
             console.log('Updated');
         }
         draw() {
+            this.entities.forEach((entity) => entity.draw(this.ctx));
         }
         stop() {
             this.loop.stop();

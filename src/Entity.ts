@@ -1,14 +1,16 @@
 /**
  * Template method
  */
-class Entity {
+export default class Entity {
+    private name: string;
     private x: number;
     private y: number;
+    private z: number;
     private width: number;
     private height: number;
     private color: string;
 
-    constructor(x = 256, y = 256, width = 32, height = 32, color = 'black') {
+    constructor(name: string, x = 256, y = 256, width = 32, height = 32, color = 'black') {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -22,7 +24,9 @@ class Entity {
     }
 
     public draw(ctx: CanvasRenderingContext2D) {
-
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.font = '16px Monospace';
+        ctx.fillText(this.name, this.x, this.y);
     }
 
     private getRandomInt(min: number, max: number) {
