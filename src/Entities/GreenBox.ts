@@ -7,7 +7,7 @@ export default class GreenBox extends Entity {
     y = 256,
     width = 32,
     height = 32,
-    color = "Green"
+    color = "#A9DC76"
   ) {
     super(name, x, y, width, height, color);
   }

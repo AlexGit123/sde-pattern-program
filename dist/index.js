@@ -5,7 +5,7 @@ define("Entity", ["require", "exports"], function (require, exports) {
      * Template method
      */
     class Entity {
-        constructor(name = "entity", x = 256, y = 256, width = 32, height = 32, color = "red") {
+        constructor(name = "Box", x = 256, y = 256, width = 32, height = 32, color = "black") {
             this.name = name;
             this.x = x;
             this.y = y;
@@ -59,11 +59,8 @@ define("Entities/BlueBox", ["require", "exports", "Entity"], function (require, 
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class BlueBox extends Entity_1.default {
-        constructor(name = "Blue Box", x = 256, y = 256, width = 32, height = 32, color = "blue") {
+        constructor(name = "Blue Box", x = 256, y = 256, width = 32, height = 32, color = "#AB9DF2") {
             super(name, x, y, width, height, color);
-        }
-        update() {
-            this.x += 6;
         }
     }
     exports.default = BlueBox;
@@ -72,7 +69,7 @@ define("Entities/RedBox", ["require", "exports", "Entity"], function (require, e
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class RedBox extends Entity_2.default {
-        constructor(name = "Red Box", x = 256, y = 256, width = 32, height = 32, color = "red") {
+        constructor(name = "Red Box", x = 256, y = 256, width = 32, height = 32, color = "#FF6188") {
             super(name, x, y, width, height, color);
         }
     }
@@ -82,7 +79,7 @@ define("Entities/GreenBox", ["require", "exports", "Entity"], function (require,
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class GreenBox extends Entity_3.default {
-        constructor(name = "Green Box", x = 256, y = 256, width = 32, height = 32, color = "Green") {
+        constructor(name = "Green Box", x = 256, y = 256, width = 32, height = 32, color = "#A9DC76") {
             super(name, x, y, width, height, color);
         }
     }
@@ -92,7 +89,7 @@ define("Entities/YellowBox", ["require", "exports", "Entity"], function (require
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class YellowBox extends Entity_4.default {
-        constructor(name = "Yellow Box", x = 256, y = 256, width = 32, height = 32, color = "yellow") {
+        constructor(name = "Yellow Box", x = 256, y = 256, width = 32, height = 32, color = "#FFD866") {
             super(name, x, y, width, height, color);
         }
     }
@@ -134,7 +131,7 @@ define("Game", ["require", "exports", "Loop", "Entity", "Entities/BlueBox", "Ent
             this.entities.sort((a, b) => a.y - b.y);
         }
         draw() {
-            this.ctx.fillStyle = "white";
+            this.ctx.fillStyle = "#FDF9F3";
             this.ctx.fillRect(0, 0, this.canvasElement.width, this.canvasElement.height);
             this.entities.forEach((entity) => entity.draw(this.ctx));
         }

@@ -7,7 +7,7 @@ export default class RedBox extends Entity {
     y = 256,
     width = 32,
     height = 32,
-    color = "red"
+    color = "#FF6188"
   ) {
     super(name, x, y, width, height, color);
   }

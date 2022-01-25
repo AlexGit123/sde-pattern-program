@@ -7,7 +7,7 @@ export default class YellowBox extends Entity {
     y = 256,
     width = 32,
     height = 32,
-    color = "yellow"
+    color = "#FFD866"
   ) {
     super(name, x, y, width, height, color);
   }

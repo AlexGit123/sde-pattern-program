@@ -53,7 +53,7 @@ export default class Game {
   }
 
   draw() {
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = "#FDF9F3";
     this.ctx.fillRect(
       0,
       0,

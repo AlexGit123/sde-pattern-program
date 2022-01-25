@@ -10,12 +10,12 @@ export default class Entity {
   public color: string;
 
   constructor(
-    name = "entity",
+    name = "Box",
     x = 256,
     y = 256,
     width = 32,
     height = 32,
-    color = "red"
+    color = "black"
   ) {
     this.name = name;
     this.x = x;

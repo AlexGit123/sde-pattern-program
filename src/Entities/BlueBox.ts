@@ -7,12 +7,8 @@ export default class BlueBox extends Entity {
     y = 256,
     width = 32,
     height = 32,
-    color = "blue"
+    color = "#AB9DF2"
   ) {
     super(name, x, y, width, height, color);
-  }
-
-  public update(): void {
-    this.x += 6;
   }
 }
