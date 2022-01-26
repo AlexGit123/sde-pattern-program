@@ -11,4 +11,10 @@ export default class GreenBox extends Entity {
   ) {
     super(name, x, y, width, height, color);
   }
+
+  public update() {
+    super.update();
+    this.x -= 0.5;
+    this.y += 0.5;
+  }
 }

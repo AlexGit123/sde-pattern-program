@@ -31,8 +31,14 @@ export default class Entity {
   }
 
   public update() {
-    this.x += this.getRandomInt(-8, 8);
-    this.y += this.getRandomInt(-8, 8);
+    this.x += this.getRandomInt(-16, 16);
+    this.y += this.getRandomInt(-16, 16);
+
+    if (this.x < 0) this.x = 0;
+    if (this.y < 0) this.y = 0;
+
+    if (this.x > 480) this.x = 480;
+    if (this.y > 480) this.y = 480;
 
     this.currentX = this.lerp(this.currentX, this.x, 0.1);
     this.currentY = this.lerp(this.currentY, this.y, 0.1);

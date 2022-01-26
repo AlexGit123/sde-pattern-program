@@ -16,8 +16,16 @@ define("Entity", ["require", "exports"], function (require, exports) {
             this.currentY = y;
         }
         update() {
-            this.x += this.getRandomInt(-8, 8);
-            this.y += this.getRandomInt(-8, 8);
+            this.x += this.getRandomInt(-16, 16);
+            this.y += this.getRandomInt(-16, 16);
+            if (this.x < 0)
+                this.x = 0;
+            if (this.y < 0)
+                this.y = 0;
+            if (this.x > 480)
+                this.x = 480;
+            if (this.y > 480)
+                this.y = 480;
             this.currentX = this.lerp(this.currentX, this.x, 0.1);
             this.currentY = this.lerp(this.currentY, this.y, 0.1);
         }
@@ -69,6 +77,11 @@ define("Entities/BlueBox", ["require", "exports", "Entity"], function (require, 
         constructor(name = "Blue Box", x = 256, y = 256, width = 32, height = 32, color = "#AB9DF2") {
             super(name, x, y, width, height, color);
         }
+        update() {
+            super.update();
+            this.x -= 0.5;
+            this.y -= 0.5;
+        }
     }
     exports.default = BlueBox;
 });
@@ -78,6 +91,11 @@ define("Entities/RedBox", ["require", "exports", "Entity"], function (require, e
     class RedBox extends Entity_2.default {
         constructor(name = "Red Box", x = 256, y = 256, width = 32, height = 32, color = "#FF6188") {
             super(name, x, y, width, height, color);
+        }
+        update() {
+            super.update();
+            this.x += 0.5;
+            this.y += 0.5;
         }
     }
     exports.default = RedBox;
@@ -89,6 +107,11 @@ define("Entities/GreenBox", ["require", "exports", "Entity"], function (require,
         constructor(name = "Green Box", x = 256, y = 256, width = 32, height = 32, color = "#A9DC76") {
             super(name, x, y, width, height, color);
         }
+        update() {
+            super.update();
+            this.x -= 0.5;
+            this.y += 0.5;
+        }
     }
     exports.default = GreenBox;
 });
@@ -98,6 +121,11 @@ define("Entities/YellowBox", ["require", "exports", "Entity"], function (require
     class YellowBox extends Entity_4.default {
         constructor(name = "Yellow Box", x = 256, y = 256, width = 32, height = 32, color = "#FFD866") {
             super(name, x, y, width, height, color);
+        }
+        update() {
+            super.update();
+            this.x += 0.5;
+            this.y -= 0.5;
         }
     }
     exports.default = YellowBox;
