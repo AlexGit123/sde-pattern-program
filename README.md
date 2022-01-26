@@ -10,7 +10,7 @@ Small game that we created for the SDE Program assignment written in TypeScript 
 
 ### Creational:
   - #### Singleton
-    **Game** class uses Singleton pattern, since game should can be runned only once. Game class returns its instance using static `Game.getInstance()` method.
+    **Game** class uses the Singleton pattern, since game should be ran only once. Game class returns its instance using static `Game.getInstance()` method.
 
 <br>
 
@@ -19,7 +19,7 @@ Small game that we created for the SDE Program assignment written in TypeScript 
     **Game** class using Facade pattern for simplifying working with game instance. You can start or stop game using `Game.start()` & `Game.stop()` methods, or update all game entities states using `Game.update()` method.
 
   - #### Composite
-    All entities stored in specific array in the **Game** class, and updated & drawn by Loop class. This array accepts any class extended from **Entity**. 
+    All entities stored in a specific array in the **Game** class, and updated & drawn by Loop class. This array accepts any class extended from **Entity**. 
 
 <br>
 
